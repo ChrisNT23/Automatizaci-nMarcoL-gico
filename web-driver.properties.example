@@ -1,0 +1,13 @@
+#This is a date generated when the project is executed, so there is no problem if is changed or deleted
+#Thu Dec 28 16:19:23 BOT 2023
+
+#This are the times in milliseconds for the web driver, this times can be changed and modified according to the internet speed or the computer characteristics
+#If the performance of the computer or the internet speed is low, the times should be increased, this times set are just an example
+#This is the time that the page waits until a TimeoutException is Thrown, this is the minimum suggested time value, but can be changed.
+web.driver.timeout=12000
+#This is the time of the frequency of searching for an element or performing an action
+web.driver.polling.time=500
+#This is the time that the page waits for an element to be visible or clickable, this is the minimum suggested time value, but can be changed.
+web.driver.implicit.wait.time=10000
+#This is the headless mode variable this is to run the project without a UI (can be faster but may cause timing errors) but is not fully implemented
+web.driver.headless.mode=false

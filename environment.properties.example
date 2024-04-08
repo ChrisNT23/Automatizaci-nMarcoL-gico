@@ -1,0 +1,83 @@
+#DEV Environment
+#URL of the DEV environment, if the URL changes this link will be changed
+dev.base.url=http://172.18.21.32:35401
+
+#DEV Credentials
+#Credentials of the external user Leonel Messi
+dev.external.presidency.admin.ruc=1760000310001
+dev.external.presidency.admin.document=0959996463
+dev.external.presidency.admin.password=Password05
+
+#Credentials of the internal user analista planificacion
+dev.internal.planning.analyst.username=analistaplanificacion
+dev.internal.planning.analyst.password=Password04
+
+#More credentials
+dev.internal.national.secretary.username=
+dev.internal.national.secretary.password=
+dev.internal.national.undersecretary.username=
+dev.internal.national.undersecretary.password=
+dev.internal.planning.undersecretary.username=
+dev.internal.planning.undersecretary.password=
+dev.internal.planning.director.username=
+dev.internal.planning.director.password=
+
+#PRE Environment
+###URL of the PRE environment, if the URL changes this link will be changed
+pre.base.url=https://sipeipintegrado.planificacion.gob.ec
+
+#PRE Credentials
+#Credentials for External User (Set these if running in PRE env)
+pre.external.presidency.admin.ruc=
+pre.external.presidency.admin.document=
+pre.external.presidency.admin.password=
+
+#Credentials for Internal User (Set these if running in PRE env)
+pre.internal.planning.analyst.username=
+pre.internal.planning.analyst.password=
+
+#More credentials
+pre.internal.national.secretary.username=
+pre.internal.national.secretary.password=
+pre.internal.national.undersecretary.username=
+pre.internal.national.undersecretary.password=
+pre.internal.planning.undersecretary.username=
+pre.internal.planning.undersecretary.password=
+pre.internal.planning.director.username=
+pre.internal.planning.director.password=
+
+#QA Environment
+###URL of the QA environment, if the URL changes this link will be changed
+qa.base.url=http://192.188.52.253:35401
+
+#QA Credentials
+#Credentials of the external user Admin pre republica
+qa.external.presidency.admin.ruc=1760000310001
+qa.external.presidency.admin.document=1755126479
+qa.external.presidency.admin.password=Password01
+
+qa.external.planning.analyst.ruc=1791036514001
+qa.external.planning.analyst.username=0104862883
+qa.external.planning.analyst.password=Password01
+
+#Credentials for Internal User (Set these if running in QA env)
+qa.internal.planning.analyst.username=
+qa.internal.planning.analyst.password=
+
+#More credentials
+qa.internal.national.secretary.username=
+qa.internal.national.secretary.password=
+qa.internal.national.undersecretary.username=
+qa.internal.national.undersecretary.password=
+qa.internal.planning.undersecretary.username=
+qa.internal.planning.undersecretary.password=
+qa.internal.planning.director.username=
+qa.internal.planning.director.password=
+
+#Gernal Urls
+#URLs used for Page Transporter. Change only if the page URLs change.
+loginUrl=/auth
+homeUrl=/app
+newProjectUrl=/inversion/proyecto
+projectsVisualizationUrl=/inversion/proyectos
+requestTrayUrl=/workflow/bandejaSolicitudes

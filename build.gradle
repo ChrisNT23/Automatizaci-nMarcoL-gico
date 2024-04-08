@@ -1,0 +1,83 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.kruger'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'io.cucumber:cucumber-java:7.14.1'
+    testImplementation 'io.cucumber:cucumber-testng:7.14.1'
+    testImplementation 'io.cucumber:cucumber-picocontainer:7.14.1'
+
+    implementation 'org.seleniumhq.selenium:selenium-java:4.15.0'
+    implementation 'org.apache.logging.log4j:log4j-core:3.0.0-alpha1'
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
+    implementation 'me.jvt.cucumber:reporting-plugin:7.11.0'
+}
+
+test {
+    useTestNG()
+    setHeadlessMode()
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+tasks.register('executeFeatures', Test) {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            systemProperties project.properties.subMap(["envId", "browser"])
+            mainClass = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', 'me.jvt.cucumber.report.PrettyReports:reports',
+                    '--plugin', 'html:reports/cucumber-reports/cucumber-reports.html',
+                    '--plugin', 'json:build/cucumber/cucumber.json',
+                    '--plugin', 'rerun:build/cucumber/rerun.txt',
+                    '--glue', 'com.kruger',
+                    '--tags', project.findProperty("cucumberOptions")
+            ]
+        }
+    }
+}
+
+tasks.register('reExecuteFeatures', Test) {
+    dependsOn assemble, testClasses
+    doLast {
+        javaexec {
+            systemProperties project.properties.subMap(["envId", "browser"])
+            mainClass = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = [
+                    '--plugin', 'pretty',
+                    '--plugin', 'me.jvt.cucumber.report.PrettyReports:reports',
+                    '--plugin', 'html:reports/cucumber-reports/cucumber-reports.html',
+                    '--plugin', 'json:build/cucumber/rerun/cucumber.json',
+                    '--plugin', 'rerun:build/cucumber/rerun.txt',
+                    '--glue', 'com.kruger',
+                    '@build/cucumber/rerun.txt'
+            ]
+        }
+    }
+}
+
+def setHeadlessMode() {
+    def headlessMode = project.findProperty("headlessMode")?.toString() ?: 'false'
+    def propertiesFile = file("web-driver.properties")
+    if (propertiesFile.exists()) {
+        def existingProperties = new Properties()
+        existingProperties.load(new FileInputStream(propertiesFile))
+        existingProperties.setProperty("web.driver.headless.mode", headlessMode)
+        existingProperties.store(new FileOutputStream(propertiesFile), null)
+    }
+}
