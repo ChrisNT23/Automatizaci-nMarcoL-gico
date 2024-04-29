@@ -38,10 +38,16 @@ public class UIMethods {
             element = DRIVER_WAIT.until(ExpectedConditions.elementToBeClickable(element));
             element.click();
             LOG.info("Clicking on the element ->" + element);
-        } catch (Exception e) {
-            LOG.error("Error clicking on the element -> " + element.toString());
-            throw new RuntimeException("Error clicking on the element " + e);
+        } catch (TimeoutException e) {
+            LOG.error("Error waiting for the element to be clicked -> " + element);
+            throw new TimeoutException("Error waiting for the element to be clicked: " + e);
+        } catch (ElementClickInterceptedException e) {
+            LOG.error("Error clicking on the element -> " + element + " because was intercepted");
+            clickOnElement(element);
+            //throw new ElementClickInterceptedException("Error clicking on the element because was intercepted: " + e);
         }
+
+
 
     }
 

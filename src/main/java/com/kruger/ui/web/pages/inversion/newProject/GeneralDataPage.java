@@ -7,6 +7,10 @@ import com.kruger.ui.web.sections.EntitySelectorSection;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+
+
 
 /**
  * This class represents the General Data Page, which extends BaseProjectPage.
@@ -23,6 +27,7 @@ public class GeneralDataPage extends BaseProjectPage {
     @FindBy(id = "fechaInicioProyecto")
     WebElement projectStartDate;
     @FindBy(id = "fechaFinProyecto")
+    /*@FindBy(xpath = "//*[@id='fechaFinProyecto']/button")*/
     WebElement projectEndDate;
     @FindBy(id = "telefonoResponsable")
     WebElement phoneNumberBox;
@@ -53,6 +58,8 @@ public class GeneralDataPage extends BaseProjectPage {
     }
 
     private EntitySelectorSection clickOnEntitySelector() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Adjust the timeout as needed
+        wait.until(ExpectedConditions.elementToBeClickable(executingEntityButton));
         UIMethods.clickOnElement(executingEntityButton);
         return new EntitySelectorSection();
     }
@@ -262,7 +269,7 @@ public class GeneralDataPage extends BaseProjectPage {
      * @param projectData The GeneralProjectData object containing project-related information.
      * @return The GeneralDataPage object representing the created project's general data page.
      */
-    public GeneralDataPage createProject(GeneralProjectData projectData) {
+    public GeneralDataPage createProject(GeneralProjectData projectData)  {
         setInitialProjectData(projectData);
         setResponsibleData(projectData);
         setProductDetails(projectData);
@@ -270,4 +277,6 @@ public class GeneralDataPage extends BaseProjectPage {
         return this;
     }
 
+
+    
 }

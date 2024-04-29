@@ -5,7 +5,8 @@ import com.kruger.entitys.LogicFrameData;
 import java.util.Map;
 
 /**
- * The LogicFrameDataBuilder class is responsible for building LogicFrameData objects.
+ * The LogicFrameDataBuilder class is responsible for building LogicFrameData
+ * objects.
  */
 public class LogicFrameDataBuilder {
     private String coreProblem;
@@ -49,6 +50,14 @@ public class LogicFrameDataBuilder {
     private String goal;
     private String weighting;
     private String yearValue;
+    private String componentSelector;
+    private String componentName;
+    private String indicatorP;
+    private String measureUnit;
+    private String baseLineP;
+    private String goalPurpose;
+    private String ponderacion;
+    private String year;
 
     public String getCoreProblem() {
         return coreProblem;
@@ -213,6 +222,34 @@ public class LogicFrameDataBuilder {
     public String getYearValue() {
         return yearValue;
     }
+
+    public String getcomponentSelector() {
+        return componentSelector;
+    }
+    public String getcomponentName() {
+        return componentName;
+    }
+
+    public String getindicatorP() {
+        return indicatorP;
+    }
+    public String getmeasureUnit() {
+        return measureUnit;
+    }
+    public String getbaseLineP() {
+        return baseLineP;
+    }
+    public String getgoalPurpose() {
+        return goalPurpose;
+    }
+
+    public String getponderacion() {
+        return ponderacion;
+    }
+    public String getyear() {
+        return year;
+    }
+
 
     public LogicFrameDataBuilder withCoreProblem(String coreProblem) {
         this.coreProblem = coreProblem;
@@ -467,6 +504,14 @@ public class LogicFrameDataBuilder {
         goal = data.get("goal");
         weighting = data.get("weighting");
         yearValue = data.get("yearValue");
+        componentSelector = data.get("componentSelector");
+        componentName = data.get("componentName");
+        indicatorP = data.get("indicatorP");
+        measureUnit = data.get("measureUnit");
+        baseLineP = data.get("baseLineP");
+        goalPurpose = data.get("goalPurpose");
+        ponderacion = data.get("ponderacion");
+        year = data.get("year");
         return this;
     }
 

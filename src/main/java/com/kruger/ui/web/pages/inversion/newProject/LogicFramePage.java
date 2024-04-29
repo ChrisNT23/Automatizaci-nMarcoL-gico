@@ -14,13 +14,18 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
- * LogicFramePage class represents the page for managing logic frames in a project.
- * It extends the BaseProjectPage class and provides methods to interact with various elements of the logic frame page.
+ * LogicFramePage class represents the page for managing logic frames in a
+ * project.
+ * It extends the BaseProjectPage class and provides methods to interact with
+ * various elements of the logic frame page.
  */
 public class LogicFramePage extends BaseProjectPage {
-    private static final String PLUS_ICON_BUTTON_XPATH = "//textarea[@id='%s']/ancestor::div[@class='p-fluid grid formgrid justify-content-center']/descendant::button";
+    private static final String PLUS_ICON_BUTTON_XPATH = "//textarea[@id='%s']/parent::span//following-sibling::button";
     private static final String CONFIGURE_BASE_LINE_XPATH = "//tr[td='%s']//descendant::button//span[contains(@class,'pencil')]";
-    private static final String SELECT_FROM_TABLE_XPATH = "//td[text()='%s']";
+    //private static final String SELECT_FROM_TABLE_XPATH = "//td[text()='%s']";
+    private static final String SELECT_FROM_TABLE_XPATH = "(//div[text()='%s']/parent::td)[1]";
+    private static final String SELECT_FROM_TABLE_ACTIVITY_XPATH = "(//div[text()='%s']/parent::td)[1]";
+    private static final String SELECT_FROM_COMPONENT = "//li[@aria-label='%s']";
     @FindBy(xpath = "//span[contains(text(),'Problemas')]")
     WebElement problemTreeLabel;
     @FindBy(id = "problemaCentral")
@@ -37,7 +42,8 @@ public class LogicFramePage extends BaseProjectPage {
     WebElement endDetailsProjectTextBox;
     @FindBy(id = "finIndicadores")
     WebElement endIndicatorsTextBox;
-    @FindBy(id = "finMediosVerificacion")
+    //@FindBy(xpath  = "//div[@class='flex p-4']/span[@class='flex p-float-label w-full']/textarea")
+    @FindBy(xpath  = "//textarea[contains(@class,'p-inputtextarea p-inputtext p-component p-inputtextarea-resizable w-full')]")
     WebElement verificationMethodsTextBox;
     @FindBy(id = "finSupuestos")
     WebElement endAssumptionsTextBox;
@@ -45,20 +51,39 @@ public class LogicFramePage extends BaseProjectPage {
     WebElement purposeTextBox;
     @FindBy(id = "propositoDetalle")
     WebElement purposeDetailTextBox;
-    @FindBy(id = "propositoIndicadores")
+    @FindBy(id = "input-Indicadores")
     WebElement purposeIndicatorsTextBox;
     @FindBy(id = "propositoMediosVerificacion")
     WebElement purposeVerificationMethodsTextBox;
     @FindBy(id = "propositoSupuestos")
     WebElement purposeAssumptionsTextBox;
-    @FindBy(id = "componenteDetalle")
+    @FindBy(xpath = "//*[@id='inputSeleccionDetalle']")
     WebElement componentDetailTextBox;
-    @FindBy(id = "actividadDetalle")
+    @FindBy(xpath  = "//*[@id='inputSeleccionDetalle']")
     WebElement activityDetailTextBox;
     @FindBy(xpath = "//div[contains(text(), 'componente')]/following-sibling::button")
     WebElement addIndicatorButton;
     @FindBy(xpath = "//*[@class='p-progress-spinner-svg']")
     WebElement progressSpinnerIcon;
+    //@FindBy(xpath = "//div[@class='p-toast-message-content']")
+    @FindBy(xpath = "//button[@class='p-toast-icon-close p-link']")
+    WebElement notification;
+    //Anualización de metas
+    @FindBy(id = "componente")
+    WebElement componentSelector;
+    @FindBy(id = "indicador")
+    WebElement anualizationPurposeIndicator;
+    @FindBy(id = "unidadMedida")
+    WebElement anualizationMeasureUnit;
+    @FindBy( xpath = "//*[@id='lineaBase']/input")
+    WebElement anualizationBaseLine;
+    @FindBy(xpath = "//*[@id='meta']/input")
+    WebElement anualizationGoalPurpose;
+    @FindBy(xpath  = "//*[@id='ponderacion']/input")
+    WebElement anualizationPonderacion;
+    @FindBy( xpath = "//*[@id='anio-0']/input")
+    WebElement anualizationYear;
+
 
 
     public LogicFramePage() {
@@ -165,7 +190,8 @@ public class LogicFramePage extends BaseProjectPage {
     }
 
     private BaseLineSection clickOnConfigureBaseLineButton(String indicatorName) {
-        WebElement configureBaseLineButton = UIMethods.getElementFromDynamicXpath(CONFIGURE_BASE_LINE_XPATH, indicatorName);
+        WebElement configureBaseLineButton = UIMethods.getElementFromDynamicXpath(CONFIGURE_BASE_LINE_XPATH,
+                indicatorName);
         UIMethods.clickOnElement(configureBaseLineButton);
         return new BaseLineSection();
     }
@@ -196,7 +222,7 @@ public class LogicFramePage extends BaseProjectPage {
     }
 
     private void clickOnActivity(String activityName) {
-        WebElement activity = UIMethods.getElementFromDynamicXpath(SELECT_FROM_TABLE_XPATH, activityName);
+        WebElement activity = UIMethods.getElementFromDynamicXpath(SELECT_FROM_TABLE_ACTIVITY_XPATH, activityName);
         UIMethods.clickOnElement(activity);
     }
 
@@ -307,9 +333,11 @@ public class LogicFramePage extends BaseProjectPage {
     }
 
     /**
-     * Sets the end information including project end details, indicators, verification methods, and assumptions.
+     * Sets the end information including project end details, indicators,
+     * verification methods, and assumptions.
      *
-     * @param logicFrameData The LogicFrameData object containing logic frame-related information.
+     * @param logicFrameData The LogicFrameData object containing logic
+     *                       frame-related information.
      */
     private void setEndInformation(LogicFrameData logicFrameData) {
         setEndOfProject(logicFrameData.getEndProject());
@@ -322,9 +350,11 @@ public class LogicFramePage extends BaseProjectPage {
     }
 
     /**
-     * Sets the purpose information including purpose details, indicators, verification methods, and assumptions.
+     * Sets the purpose information including purpose details, indicators,
+     * verification methods, and assumptions.
      *
-     * @param logicFrameData The LogicFrameData object containing logic frame-related information.
+     * @param logicFrameData The LogicFrameData object containing logic
+     *                       frame-related information.
      */
     private void setPurposeInformation(LogicFrameData logicFrameData) {
         setProjectPurpose(logicFrameData.getPurpose());
@@ -338,27 +368,33 @@ public class LogicFramePage extends BaseProjectPage {
     }
 
     /**
-     * Sets the activity information including activity detail, verification methods, assumptions, and financing sources.
+     * Sets the activity information including activity detail, verification
+     * methods, assumptions, and financing sources.
      *
-     * @param logicFrameData The LogicFrameData object containing logic frame-related information.
+     * @param logicFrameData The LogicFrameData object containing logic
+     *                       frame-related information.
      */
     private void setActivityInformation(LogicFrameData logicFrameData) {
         clickOnActivity(logicFrameData.getActivity());
         setActivityDetail(logicFrameData.getActivityDetail());
-        addVerificationMethods(logicFrameData.getActivityVerificationMethods());
+        clickOnAddActivityDetail();
+        /*addVerificationMethods(logicFrameData.getActivityVerificationMethods());
         navigateToSecondAssumptionsTab();
         addVerificationMethods(logicFrameData.getActivityAssumptions());
-        setFinancingSources(logicFrameData);
+        setFinancingSources(logicFrameData);*/
     }
 
     /**
-     * Sets the component information including component detail, verification methods, associated activities, and assumptions.
+     * Sets the component information including component detail, verification
+     * methods, associated activities, and assumptions.
      *
-     * @param logicFrameData The LogicFrameData object containing logic frame-related information.
+     * @param logicFrameData The LogicFrameData object containing logic
+     *                       frame-related information.
      */
     private void setComponentInformation(LogicFrameData logicFrameData) {
         clickOnComponent(logicFrameData.getComponent());
         setComponentDetail(logicFrameData.getComponentDetail());
+        clickOnAddComponentDetail();
         addVerificationMethods(logicFrameData.getComponentVerificationMethods());
         navigateToActivitiesTab();
         setActivityInformation(logicFrameData);
@@ -369,7 +405,8 @@ public class LogicFramePage extends BaseProjectPage {
     /**
      * Sets the problem tree including core problem, cause, and effect.
      *
-     * @param logicFrameData The LogicFrameData object containing logic frame-related information.
+     * @param logicFrameData The LogicFrameData object containing logic
+     *                       frame-related information.
      */
     private void setProblemTree(LogicFrameData logicFrameData) {
         setCoreProblem(logicFrameData.getCoreProblem());
@@ -380,7 +417,8 @@ public class LogicFramePage extends BaseProjectPage {
     /**
      * Sets the objective tree including general objective, component, and activity.
      *
-     * @param logicFrameData The LogicFrameData object containing logic frame-related information.
+     * @param logicFrameData The LogicFrameData object containing logic
+     *                       frame-related information.
      */
     private void setObjectiveTree(LogicFrameData logicFrameData) {
         setGeneralObjective(logicFrameData.getGeneralObjective());
@@ -389,9 +427,11 @@ public class LogicFramePage extends BaseProjectPage {
     }
 
     /**
-     * Sets the logic frame matrix including end information, purpose information, component information, and associated activities.
+     * Sets the logic frame matrix including end information, purpose information,
+     * component information, and associated activities.
      *
-     * @param logicFrameData The LogicFrameData object containing logic frame-related information.
+     * @param logicFrameData The LogicFrameData object containing logic
+     *                       frame-related information.
      */
     private void setLogicFrameMatrix(LogicFrameData logicFrameData) {
         setEndInformation(logicFrameData);
@@ -404,7 +444,8 @@ public class LogicFramePage extends BaseProjectPage {
     /**
      * Sets the annual goals section in the logic frame.
      *
-     * @param logicFrameData The LogicFrameData object containing logic frame-related information.
+     * @param logicFrameData The LogicFrameData object containing logic
+     *                       frame-related information.
      */
     private void setAnnualGoals(LogicFrameData logicFrameData) {
         IndicatorsSection indicatorSection = clickOnAddIndicatorButton();
@@ -416,21 +457,109 @@ public class LogicFramePage extends BaseProjectPage {
      */
     private void waitUntilProgressSpinnerIconIsVisible() {
         driverWait.until(ExpectedConditions.visibilityOf(progressSpinnerIcon));
+        driverWait.until(ExpectedConditions.invisibilityOf(progressSpinnerIcon));
     }
+
+    private void waitClickNotification() {
+        UIMethods.clickOnElement(notification);
+    }
+
+    /* PPREGUNTAR A RODRIGO */
+    private void clickComponentSelector() {
+        UIMethods.clickOnElement(componentSelector);
+    }
+
+    private void clickComponentSelection(String componentName) {
+        WebElement componentOption = UIMethods.getElementFromDynamicXpath(SELECT_FROM_COMPONENT,componentName);
+        UIMethods.clickOnElement(componentOption);
+    }
+
+    private void setAnualizationPurposeIndicator (String indicator) {
+        UIMethods.enterText(anualizationPurposeIndicator, indicator);
+    }
+    
+    private void setAnualizationMeasureUnit (String measureUnit) {
+        UIMethods.enterText(anualizationMeasureUnit, measureUnit);
+    }
+
+    private void setAnualizationBaseLine (String baseLine) {
+        UIMethods.enterText(anualizationBaseLine, baseLine);
+    }
+
+    private void setAnualizationGoalPurpose (String goalPurpose) {
+        UIMethods.enterText(anualizationGoalPurpose, goalPurpose);
+    }
+
+    private void setAnualizationPonderacion (String ponderacion) {
+        UIMethods.enterText(anualizationPonderacion, ponderacion);
+    }
+
+    private void setAnualizationAnualizationYear (String year) {
+        UIMethods.enterText(anualizationYear, year);
+    }
+
+    private void clickOnAddComponentDetail() {
+        clickOnButton(XpathText.ADD_COMPONENT_DETAIL_BUTTON.getText());
+    }   
+
+    private void clickOnAddActivityDetail() {
+        clickOnButton(XpathText.ADD_ACTIVITY_DETAIL_BUTTON.getText());
+    } 
+
+
 
     /**
      * Saves the logic frame data.
      *
-     * @param logicFrameData The LogicFrameData object containing logic frame-related information.
+     * @param logicFrameData The LogicFrameData object containing logic
+     *                       frame-related information.
      * @return The LogicFramePage object after saving the data.
      */
     public LogicFramePage saveLogicFrameData(LogicFrameData logicFrameData) {
-        setProblemTree(logicFrameData);
-        setObjectiveTree(logicFrameData);
-        setLogicFrameMatrix(logicFrameData);
-        setAnnualGoals(logicFrameData);
+        // Llenar los campos obligatorios primero
+        setCoreProblem(logicFrameData.getCoreProblem());
+        setGeneralObjective(logicFrameData.getGeneralObjective());
+        setEndOfProject(logicFrameData.getEndProject());
+        setEndDetails(logicFrameData.getEndDetails());
+        navigateToPurposeTab();
+        setProjectPurpose(logicFrameData.getPurpose());
+        setPurposeDetails(logicFrameData.getPurposeDetails());
+        // Guardar los datos después de llenar los campos obligatorios
         saveData();
         waitUntilProgressSpinnerIconIsVisible();
+
+        clickOnAddComponentButton();
+        waitClickNotification();       
+        clickOnAddCauseButton();
+        waitClickNotification();
+        clickOnAddActivityButton();
+        waitClickNotification();
+        clickOnAddEffectButton();
+        waitClickNotification();
+        navigateToPurposeTab();
+        //Revisar esto
+        setPurposeIndicators(logicFrameData.getPurposeIndicators());
+        clickOnPurposeIndicatorsPlusButton();
+        setBaseLine(logicFrameData);
+        //
+        navigateToComponentsTab();
+        setComponentInformation(logicFrameData);
+        clickOnComponent(logicFrameData.getComponent());
+        navigateToActivitiesTab();
+        setActivityInformation(logicFrameData);
+
+        // Anualization de metas
+        clickComponentSelector();
+        clickComponentSelection(logicFrameData.getcomponentName());
+        setAnualizationPurposeIndicator(logicFrameData.getPurposeIndicators());
+        setAnualizationMeasureUnit(logicFrameData.getmeasureUnit());
+        setAnualizationBaseLine(logicFrameData.getBaseLine()); //
+        setAnualizationGoalPurpose(logicFrameData.getgoalPurpose());
+        setAnualizationPonderacion(logicFrameData.getponderacion()); 
+        setAnualizationAnualizationYear(logicFrameData.getyear()); 
+        saveData();
+
+
         return new LogicFramePage();
     }
 

@@ -21,9 +21,9 @@ public class BaseLineSection extends BaseFormPage {
     WebElement quantitativeIndicatorTextBox;
     @FindBy(id = "cualitativo")
     WebElement qualitativeIndicatorTextBox;
-    @FindBy(xpath = "//label[contains(text(),'del Indicador')]/../span/input")
+    @FindBy(xpath = "//input[@id='ponderacion']")
     WebElement indicatorWeightingTextBox;
-    @FindBy(xpath = "//span[@id='cantidad']/input")
+    @FindBy(id = "cantidad")
     WebElement quantityTextBox;
     @FindBy(id = "horizonte")
     WebElement horizonDate;
@@ -83,7 +83,8 @@ public class BaseLineSection extends BaseFormPage {
         setIndicatorWeightingTextBox(logicFrameData.getIndicatorWeighting());
         setOtherUnits(logicFrameData.getOtherUnits());
         setQuantityTextBox(logicFrameData.getQuantity());
-        setHorizonDate(logicFrameData.getHorizonDate());
+        setHorizonDate(logicFrameData.getHorizonDate());        
         clickOnAcceptButton();
+        
     }
 }

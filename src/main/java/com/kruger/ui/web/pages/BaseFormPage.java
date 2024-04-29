@@ -22,6 +22,7 @@ public abstract class BaseFormPage extends BasePage {
     private static final String SELECT_DATE_XPATH = "//span[text()='%s']";
     private static final String CURRENT_YEAR_XPATH = "//button[contains(@class,'p-datepicker-year')]";
     private static final String CURRENT_MONTH_XPATH = "//button[contains(@class,'p-datepicker-month')]";
+    
 
     /**
      * Selects an option from a dropdown menu.
@@ -72,7 +73,8 @@ public abstract class BaseFormPage extends BasePage {
         clickOnButton(XpathText.SAVE_BUTTON.getText());
     }
 
-    /**
+
+      /**
      * Selects an option from a dropdown menu.
      *
      * @param option The option to be selected.

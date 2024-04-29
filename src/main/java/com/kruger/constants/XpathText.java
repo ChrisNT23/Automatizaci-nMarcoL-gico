@@ -47,7 +47,7 @@ public enum XpathText {
     END_INDICATORS_PLUS_BUTTON("finIndicadores"),
     END_VERIFICATION_METHODS_PLUS_BUTTON("finMediosVerificacion"),
     END_ASSUMPTIONS_PLUS_BUTTON("finSupuestos"),
-    PURPOSE_INDICATORS_PLUS_BUTTON("propositoIndicadores"),
+    PURPOSE_INDICATORS_PLUS_BUTTON("input-Indicadores"),
     MEASURING_UNIT_DROPDOWN("Unidad de medida"),
     OTHER_UNITS_TEXT_BOX("Otras unidades"),
     ACCEPT_BUTTON("Aceptar"),
@@ -102,7 +102,9 @@ public enum XpathText {
     ANALYSIS_TEXT_INPUT("lisis"),
     RECOMMENDATIONS_TEXT_INPUT("Recomendaciones"),
     CONCLUSIONS_TEXT_INPUT("Conclusiones"),
-    APPROVE_REQUEST_BUTTON("Aprobar Solicitud");
+    APPROVE_REQUEST_BUTTON("Aprobar Solicitud"),
+    ADD_COMPONENT_DETAIL_BUTTON("Actualizar componente"),
+    ADD_ACTIVITY_DETAIL_BUTTON("Actualizar actividad");
 
     private final String text;
 

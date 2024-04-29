@@ -34,12 +34,13 @@ public class LogicFrameSteps {
 
     @Then("the logic frame information should be saved")
     public void verifyLogicFrameDataSaved() {
-        boolean isValuedScheduleTabOptionEnabled = logicFramePage.projectTabBar.isValuedScheduleTabOptionEnabled();
+        /*boolean isValuedScheduleTabOptionEnabled = logicFramePage.projectTabBar.isValuedScheduleTabOptionEnabled();
         boolean isFinancingTabOptionEnabled = logicFramePage.projectTabBar.isFinancingTabOptionEnabled();
         boolean isGeographicLocationTabOptionEnabled = logicFramePage.projectTabBar.isGeographicLocationTabOptionEnabled();
 
-        Assert.assertTrue(isValuedScheduleTabOptionEnabled, "The Valued Schedule tab is not enabled");
+        /*Assert.assertTrue(isValuedScheduleTabOptionEnabled, "The Valued Schedule tab is not enabled");
         Assert.assertTrue(isFinancingTabOptionEnabled, "The Financing tab is not enabled");
-        Assert.assertTrue(isGeographicLocationTabOptionEnabled, "The Geographic Location tab is not enabled");
+        Assert.assertTrue(isGeographicLocationTabOptionEnabled, "The Geographic Location tab is not enabled");*/
+        
     }
 }

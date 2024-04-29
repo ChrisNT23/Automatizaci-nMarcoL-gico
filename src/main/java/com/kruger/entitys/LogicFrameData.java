@@ -48,6 +48,16 @@ public class LogicFrameData {
     private final String goal;
     private final String weighting;
     private final String yearValue;
+    private String componentSelector;
+    private String componentName;
+    private String indicatorP;
+    private String measureUnit;
+    private String baseLineP;
+    private String goalPurpose;
+    private String ponderacion;
+    private String year;
+
+
 
     /**
      * Constructs a new LogicFrameData instance with the provided builder.
@@ -96,6 +106,15 @@ public class LogicFrameData {
         this.goal = builder.getGoal();
         this.weighting = builder.getWeighting();
         this.yearValue = builder.getYearValue();
+        this.componentSelector = builder.getcomponentSelector();
+        this.componentName = builder.getcomponentName();
+        this.indicatorP = builder.getindicatorP();
+        this.measureUnit = builder.getMeasuringUnit();
+        this.baseLineP = builder.getbaseLineP();
+        this.goalPurpose = builder.getgoalPurpose();
+        this.ponderacion = builder.getponderacion();
+        this.year = builder.getyear();
+
     }
 
     /**
@@ -269,5 +288,32 @@ public class LogicFrameData {
 
     public String getYearValue() {
         return yearValue;
+    }
+
+    public String getcomponentSelector() {
+        return componentSelector;
+    }
+    public String getcomponentName() {
+        return componentName;
+    }
+
+    public String getindicatorP() {
+        return indicatorP;
+    }
+    public String getmeasureUnit() {
+        return measureUnit;
+    }
+    public String getbaseLineP() {
+        return baseLineP;
+    }
+    public String getgoalPurpose() {
+        return goalPurpose;
+    }
+
+    public String getponderacion() {
+        return ponderacion;
+    }
+    public String getyear() {
+        return year;
     }
 }

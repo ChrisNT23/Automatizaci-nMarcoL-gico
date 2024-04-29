@@ -9,3 +9,4 @@ Feature: Login
     Examples:
       | User Type | User Role | User Area  |
       | external  | admin     | presidency |
+
