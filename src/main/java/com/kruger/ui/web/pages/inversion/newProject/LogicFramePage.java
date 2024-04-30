@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+
 /**
  * LogicFramePage class represents the page for managing logic frames in a
  * project.
@@ -43,7 +44,8 @@ public class LogicFramePage extends BaseProjectPage {
     @FindBy(id = "finIndicadores")
     WebElement endIndicatorsTextBox;
     //@FindBy(xpath  = "//div[@class='flex p-4']/span[@class='flex p-float-label w-full']/textarea")
-    @FindBy(xpath  = "//textarea[contains(@class,'p-inputtextarea p-inputtext p-component p-inputtextarea-resizable w-full')]")
+    //@FindBy(xpath  = "//textarea[contains(@class,'p-inputtextarea p-inputtext p-component p-inputtextarea-resizable w-full')]")
+    @FindBy(xpath = "//*[contains(@id, 'input-Medios de verificaci')]")
     WebElement verificationMethodsTextBox;
     @FindBy(id = "finSupuestos")
     WebElement endAssumptionsTextBox;
@@ -59,7 +61,7 @@ public class LogicFramePage extends BaseProjectPage {
     WebElement purposeAssumptionsTextBox;
     @FindBy(xpath = "//*[@id='inputSeleccionDetalle']")
     WebElement componentDetailTextBox;
-    @FindBy(xpath  = "//*[@id='inputSeleccionDetalle']")
+    @FindBy(xpath  = "(//textarea[@id='inputSeleccionDetalle'])[2]")
     WebElement activityDetailTextBox;
     @FindBy(xpath = "//div[contains(text(), 'componente')]/following-sibling::button")
     WebElement addIndicatorButton;
@@ -395,11 +397,11 @@ public class LogicFramePage extends BaseProjectPage {
         clickOnComponent(logicFrameData.getComponent());
         setComponentDetail(logicFrameData.getComponentDetail());
         clickOnAddComponentDetail();
-        addVerificationMethods(logicFrameData.getComponentVerificationMethods());
-        navigateToActivitiesTab();
-        setActivityInformation(logicFrameData);
-        navigateToAssumptionsTab();
-        addVerificationMethods(logicFrameData.getComponentAssumptions());
+        //addVerificationMethods(logicFrameData.getComponentVerificationMethods());
+        //navigateToActivitiesTab();
+        //setActivityInformation(logicFrameData);
+        //navigateToAssumptionsTab();
+        //addVerificationMethods(logicFrameData.getComponentAssumptions());
     }
 
     /**
@@ -464,7 +466,7 @@ public class LogicFramePage extends BaseProjectPage {
         UIMethods.clickOnElement(notification);
     }
 
-    /* PPREGUNTAR A RODRIGO */
+    
     private void clickComponentSelector() {
         UIMethods.clickOnElement(componentSelector);
     }
@@ -537,7 +539,7 @@ public class LogicFramePage extends BaseProjectPage {
         clickOnAddEffectButton();
         waitClickNotification();
         navigateToPurposeTab();
-        //Revisar esto
+        //Llena linea base
         setPurposeIndicators(logicFrameData.getPurposeIndicators());
         clickOnPurposeIndicatorsPlusButton();
         setBaseLine(logicFrameData);
@@ -547,6 +549,7 @@ public class LogicFramePage extends BaseProjectPage {
         clickOnComponent(logicFrameData.getComponent());
         navigateToActivitiesTab();
         setActivityInformation(logicFrameData);
+        
 
         // Anualization de metas
         clickComponentSelector();
