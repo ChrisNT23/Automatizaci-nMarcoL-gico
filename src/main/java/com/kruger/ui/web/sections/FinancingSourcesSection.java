@@ -19,6 +19,9 @@ public class FinancingSourcesSection extends BaseFormPage {
     WebElement quantityTextBox;
     @FindBy(id = "periodoFiscal")
     WebElement fiscalPeriodDate;
+    @FindBy(xpath = "//button[@class='p-button p-component p-button-rounded p-button-success p-button-text p-button-icon-only']")
+    WebElement plusButton;
+    
 
     @Override
     public void waitUntilPageObjectIsLoaded() {
@@ -56,6 +59,15 @@ public class FinancingSourcesSection extends BaseFormPage {
         clickOnButton(XpathText.ADD_BUTTON.getText());
     }
 
+    private void clickOnPlusButton() {
+        UIMethods.clickOnElement(plusButton);
+    }
+
+    private void clickOnAcceptButton () {
+        clickOnButton(XpathText.ACCEPT_BUTTON.getText());
+    }
+        
+
     /**
      * Sets the financing sources information.
      */
@@ -63,9 +75,16 @@ public class FinancingSourcesSection extends BaseFormPage {
         selectFinancingSource(logicFrameData.getFinancingSource().toUpperCase());
         selectSpendingGroup(logicFrameData.getSpendingGroup().toUpperCase());
         selectBudgetItem(logicFrameData.getBudgetItem().toUpperCase());
+        // setUnitCost(logicFrameData.getUnitCost());
+        // setQuantity(logicFrameData.getQuantityUnit());
+        // setFiscalPeriodDate(logicFrameData.getFiscalPeriod());
+        clickOnAddButton();
+        clickOnPlusButton();
         setUnitCost(logicFrameData.getUnitCost());
         setQuantity(logicFrameData.getQuantityUnit());
         setFiscalPeriodDate(logicFrameData.getFiscalPeriod());
-        clickOnAddButton();
+        clickOnAcceptButton();
     }
+
+
 }

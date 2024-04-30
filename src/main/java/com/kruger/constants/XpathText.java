@@ -55,7 +55,7 @@ public enum XpathText {
     PURPOSE_ASSUMPTIONS_PLUS_BUTTON("propositoSupuestos"),
     FINANCING_SOURCE_DROPDOWN("Fuente de financiamiento"),
     SPENDING_GROUP_DROPDOWN("Grupo Gasto"),
-    BUDGET_ITEM_DROPDOWN("Item Presupuestario"),
+    BUDGET_ITEM_DROPDOWN("tem Presupuestario"),
     ADD_BUTTON("Agregar"),
     VALUED_SCHEDULE_TAB("Cronograma Valorado"),
     FINANCING_TAB("Cronograma Valorado"),

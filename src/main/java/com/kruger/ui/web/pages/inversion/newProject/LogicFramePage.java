@@ -47,7 +47,7 @@ public class LogicFramePage extends BaseProjectPage {
     //@FindBy(xpath  = "//textarea[contains(@class,'p-inputtextarea p-inputtext p-component p-inputtextarea-resizable w-full')]")
     @FindBy(xpath = "//*[contains(@id, 'input-Medios de verificaci')]")
     WebElement verificationMethodsTextBox;
-    @FindBy(id = "finSupuestos")
+    @FindBy(xpath =  "(//textarea[@id='input-Supuestos'])[1]")
     WebElement endAssumptionsTextBox;
     @FindBy(id = "proposito")
     WebElement purposeTextBox;
@@ -85,6 +85,9 @@ public class LogicFramePage extends BaseProjectPage {
     WebElement anualizationPonderacion;
     @FindBy( xpath = "//*[@id='anio-0']/input")
     WebElement anualizationYear;
+    @FindBy( xpath = "(//button[@aria-label='Agregar'])[2]")
+    WebElement addAnualizationButton;
+
 
 
 
@@ -348,7 +351,7 @@ public class LogicFramePage extends BaseProjectPage {
         navigateToVerificationMethodsTab();
         addVerificationMethods(logicFrameData.getEndVerificationMethods());
         navigateToAssumptionsTab();
-        addEndAssumptions(logicFrameData.getEndAssumptions());
+        //addEndAssumptions(logicFrameData.getEndAssumptions());
     }
 
     /**
@@ -508,6 +511,10 @@ public class LogicFramePage extends BaseProjectPage {
         clickOnButton(XpathText.ADD_ACTIVITY_DETAIL_BUTTON.getText());
     } 
 
+    private void clickOnAddAnualizationButton () {
+        UIMethods.clickOnElement(addAnualizationButton);
+    }
+
 
 
     /**
@@ -549,7 +556,12 @@ public class LogicFramePage extends BaseProjectPage {
         clickOnComponent(logicFrameData.getComponent());
         navigateToActivitiesTab();
         setActivityInformation(logicFrameData);
-        
+        //Fuentes de financiamiento
+        clickOnComponent(logicFrameData.getComponent());
+        navigateToActivitiesTab();
+        clickOnActivity(logicFrameData.getActivity()); 
+        navigateToFinancingSourcesTab();
+        setFinancingSources(logicFrameData);
 
         // Anualization de metas
         clickComponentSelector();
@@ -560,7 +572,19 @@ public class LogicFramePage extends BaseProjectPage {
         setAnualizationGoalPurpose(logicFrameData.getgoalPurpose());
         setAnualizationPonderacion(logicFrameData.getponderacion()); 
         setAnualizationAnualizationYear(logicFrameData.getyear()); 
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            
+        }
+        clickComponentSelector();
+        clickComponentSelection(logicFrameData.getcomponentName());
+        clickOnAddAnualizationButton();        
         saveData();
+
+        
+
+
 
 
         return new LogicFramePage();
