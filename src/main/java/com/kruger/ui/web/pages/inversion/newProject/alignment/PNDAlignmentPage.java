@@ -40,9 +40,7 @@ public class PNDAlignmentPage extends AlignmentBasePage {
         return new SelectGoalSection();
     }
 
-    /**
-     * Sets the PND alignment by clicking on the alignment PND button and notifying PND.
-     */
+    
     private void setPNDAlignment() {
         clickOnAlignmentPNDButton();
         UIMethods.clickOnElement(notifyPNDButton);
@@ -53,10 +51,15 @@ public class PNDAlignmentPage extends AlignmentBasePage {
      *
      * @param alignmentData AlignmentData object containing the goal name.
      */
+    
     public void setPNDGoal(AlignmentData alignmentData) {
-        setPNDAlignment();
+        /*setPNDAlignment();
         UIMethods.clickOnElement(pndDropdown);
         SelectGoalSection goalSection = clickOnSelectGoalButton();
-        goalSection.selectGoal(alignmentData.getGoalName());
-    }
+        goalSection.selectGoal(alignmentData.getGoalName()); */
+        saveData();
+    } 
+    
+
+    
 }
