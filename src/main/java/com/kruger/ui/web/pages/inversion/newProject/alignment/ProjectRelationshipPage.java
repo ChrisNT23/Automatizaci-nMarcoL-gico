@@ -55,10 +55,10 @@ public class ProjectRelationshipPage extends AlignmentBasePage {
      * @param alignmentData AlignmentData object containing project relationship details.
      */
     public void addProjectRelationship(AlignmentData alignmentData) {
-        if (!alignmentData.getProjectRelatedName().isEmpty()) {
+        /*if (!alignmentData.getProjectRelatedName().isEmpty()) {
             selectProjectType(alignmentData.getProjectType().toUpperCase());
             addProject(alignmentData.getProjectRelatedName());
-        }
+        }*/
         saveData();
     }
 

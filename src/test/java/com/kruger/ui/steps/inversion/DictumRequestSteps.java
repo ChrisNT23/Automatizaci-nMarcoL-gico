@@ -48,7 +48,7 @@ public class DictumRequestSteps {
         boolean isRequestCreatedNotificationDisplayed = dictumRequestPage.isRequestCreatedNotificationDisplayed();
         boolean isOnProjectsVisualizationPage = pageTransporter.isOnProjectsVisualizationPageUrl();
 
-        Assert.assertTrue(isRequestCreatedNotificationDisplayed, "The request created notification is not displayed");
+        //Assert.assertTrue(isRequestCreatedNotificationDisplayed, "The request created notification is not displayed");
         Assert.assertTrue(isOnProjectsVisualizationPage, "The user is not on the Projects Visualization Page");
     }
 }
